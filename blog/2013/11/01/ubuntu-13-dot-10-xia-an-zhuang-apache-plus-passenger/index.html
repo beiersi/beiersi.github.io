@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>黔之驴</title>
+  <title>ubuntu 13.10 下安装apache+passenger - 黔之驴</title>
   <meta name="author" content="贝尔斯">
 
   
-  <meta name="description" content="前几天用aptitude upgrade升级，总是提示无法安装成功新的linux kernel，看到报错信息里面有以后bzip没有空间什么的（过了好几天，原文提示记不住了），df看了一下boot分区90%多了，网上搜索了一下，大概的解决办法应该删除之前旧的linux核心，可参考 这里,执行命令： &hellip;">
+  <meta name="description" content="前几天打开电脑以后，升级管理器提示可以升级到13.10，简单的备份了一下文件（本人用的双系统win7+ubuntu，大部分文件都放在ntfs分区下），开始升级，升级过程一路顺利，就是时不时提示需要替换某些配置文件，yes或no就行了。 重启之后，想起来前段时间用rvm安装了ruby2. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://beiersi.github.io">
+  <link rel="canonical" href="http://beiersi.github.io/blog/2013/11/01/ubuntu-13-dot-10-xia-an-zhuang-apache-plus-passenger">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="黔之驴" type="application/atom+xml">
@@ -63,55 +63,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/11/02/qing-ru-he-chu-jiu-de-linux-kernel/">如何清除旧的linux Kernel</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-02T00:13:00+08:00" pubdate data-updated="true">Nov 2<span>nd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>前几天用aptitude upgrade升级，总是提示无法安装成功新的linux kernel，看到报错信息里面有以后bzip没有空间什么的（过了好几天，原文提示记不住了），df看了一下boot分区90%多了，网上搜索了一下，大概的解决办法应该删除之前旧的linux核心，可参考 <a href="http://askubuntu.com/questions/2793/how-do-i-remove-or-hide-old-kernel-versions-to-clean-up-the-boot-menu">这里</a>,执行命令：</p>
-
-<p>dpkg -l &lsquo;linux-<em>&rsquo; | sed &lsquo;/^ii/!d;/&rsquo;&ldquo;$(uname -r | sed &#8220;s/(.</em>)&ndash;([^0-9]+)/\1/&rdquo;)&ldquo;&lsquo;/d;s/^[^ ]<em> [^ ]</em> ([^ ]<em>).</em>/\1/;/[0-9]/!d&rsquo; | xargs sudo apt-get -y purge</p>
-
-<p>。然后boot分区就有空间了。继续执行apt-get upgrade，成功升级。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/01/ubuntu-13-dot-10-xia-an-zhuang-apache-plus-passenger/">Ubuntu 13.10 下安装apache+passenger</a></h1>
+      <h1 class="entry-title">Ubuntu 13.10 下安装apache+passenger</h1>
     
     
       <p class="meta">
@@ -134,24 +91,65 @@
   </header>
 
 
-  <div class="entry-content"><p>前几天打开电脑以后，升级管理器提示可以升级到13.10，简单的备份了一下文件（本人用的双系统win7+ubuntu，大部分文件都放在ntfs分区下），开始升级，升级过程一路顺利，就是时不时提示需要替换某些配置文件，yes或no就行了。</p>
+<div class="entry-content"><p>前几天打开电脑以后，升级管理器提示可以升级到13.10，简单的备份了一下文件（本人用的双系统win7+ubuntu，大部分文件都放在ntfs分区下），开始升级，升级过程一路顺利，就是时不时提示需要替换某些配置文件，yes或no就行了。</p>
 
 <p>重启之后，想起来前段时间用rvm安装了ruby2.0版本之后一直没有装passenger(因为平时总需要切换到win7，所以一直是在VirtualBox中的虚拟机来做开发的)，所以打算装一下，按照惯例直接passenger-install-apache2-module，结果发现居然提示出错，看了一下提示找不到一些环境变量 APACHE_XX什么的，/etc/apache2 目录下有个envvars文件，看看觉得直接source envvars应该有戏，接着继续执行passenger-install-apache2-module，这次提示没有HOME变量了，这个是因为 envvars 文件的问题，里面有一行unset HOME，所以手动执行以下export HOME=xxx，安装顺利进行。</p>
 
 <p>后面一路配置，按惯例/etc/apache2/site-available/创建好站点，执行a2ensite又提示找不到site，google一把，原来需要所有文件名都加.conf结尾，文件改名，然后a2ensite xxx.conf，重启apache，浏览器访问，终于看到了成功运行的结果。</p>
 </div>
+
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">贝尔斯</span></span>
+
+      
+
+
+
+
+
+
+
+
   
 
 
-    </article>
+<time datetime="2013-11-01T15:26:00+08:00" pubdate data-updated="true">Nov 1<span>st</span>, 2013</time>
+      
+
+<span class="categories">
   
-  <div class="pagination">
+    <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/ubuntu/'>Ubuntu</a>, <a class='category' href='/blog/categories/bu-shu/'>部署</a>
+  
+</span>
+
+
+    </p>
     
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://beiersi.github.io/blog/2013/11/01/ubuntu-13-dot-10-xia-an-zhuang-apache-plus-passenger/" data-via="" data-counturl="http://beiersi.github.io/blog/2013/11/01/ubuntu-13-dot-10-xia-an-zhuang-apache-plus-passenger/" >Tweet</a>
+  
+  
+  
 </div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/11/02/qing-ru-he-chu-jiu-de-linux-kernel/" title="Next Post: 如何清除旧的linux kernel">如何清除旧的linux kernel &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -175,6 +173,7 @@
 
   
 </aside>
+
 
     </div>
   </div>

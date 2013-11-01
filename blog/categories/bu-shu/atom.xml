@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 部署 | 黔之驴]]></title>
+  <link href="http://beiersi.github.io/blog/categories/bu-shu/atom.xml" rel="self"/>
+  <link href="http://beiersi.github.io/"/>
+  <updated>2013-11-02T00:31:22+08:00</updated>
+  <id>http://beiersi.github.io/</id>
+  <author>
+    <name><![CDATA[贝尔斯]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ubuntu 13.10 下安装apache+passenger]]></title>
+    <link href="http://beiersi.github.io/blog/2013/11/01/ubuntu-13-dot-10-xia-an-zhuang-apache-plus-passenger/"/>
+    <updated>2013-11-01T15:26:00+08:00</updated>
+    <id>http://beiersi.github.io/blog/2013/11/01/ubuntu-13-dot-10-xia-an-zhuang-apache-plus-passenger</id>
+    <content type="html"><![CDATA[<p>前几天打开电脑以后，升级管理器提示可以升级到13.10，简单的备份了一下文件（本人用的双系统win7+ubuntu，大部分文件都放在ntfs分区下），开始升级，升级过程一路顺利，就是时不时提示需要替换某些配置文件，yes或no就行了。</p>
+
+<p>重启之后，想起来前段时间用rvm安装了ruby2.0版本之后一直没有装passenger(因为平时总需要切换到win7，所以一直是在VirtualBox中的虚拟机来做开发的)，所以打算装一下，按照惯例直接passenger-install-apache2-module，结果发现居然提示出错，看了一下提示找不到一些环境变量 APACHE_XX什么的，/etc/apache2 目录下有个envvars文件，看看觉得直接source envvars应该有戏，接着继续执行passenger-install-apache2-module，这次提示没有HOME变量了，这个是因为 envvars 文件的问题，里面有一行unset HOME，所以手动执行以下export HOME=xxx，安装顺利进行。</p>
+
+<p>后面一路配置，按惯例/etc/apache2/site-available/创建好站点，执行a2ensite又提示找不到site，google一把，原来需要所有文件名都加.conf结尾，文件改名，然后a2ensite xxx.conf，重启apache，浏览器访问，终于看到了成功运行的结果。</p>
+]]></content>
+  </entry>
+  
+</feed>

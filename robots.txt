@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://beiersi.github.io/sitemap.xml 
