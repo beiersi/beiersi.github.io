@@ -4,7 +4,7 @@
   <title><![CDATA[黔之驴]]></title>
   <link href="http://beiersi.github.io/atom.xml" rel="self"/>
   <link href="http://beiersi.github.io/"/>
-  <updated>2013-11-02T00:39:49+08:00</updated>
+  <updated>2013-11-18T23:41:12+08:00</updated>
   <id>http://beiersi.github.io/</id>
   <author>
     <name><![CDATA[贝尔斯]]></name>
@@ -14,15 +14,36 @@
 
   
   <entry>
+    <title type="html"><![CDATA[ruby 字符串定义中百分号的用法]]></title>
+    <link href="http://beiersi.github.io/blog/2013/11/18/ruby-string-bai-fen-hao-yong-fa/"/>
+    <updated>2013-11-18T22:43:00+08:00</updated>
+    <id>http://beiersi.github.io/blog/2013/11/18/ruby-string-bai-fen-hao-yong-fa</id>
+    <content type="html"><![CDATA[<ol>
+<li><code>%(string)</code> 、<code>%Q(string)</code> 相当于 <code>"string"</code> 。双引号字符串表达式</li>
+<li><code>%q(string)</code> 相当于 <code>'string'</code> ，单引号字符串表达式，不会对字符串中的变量运算。</li>
+<li><code>%r(string)</code> 相当于 <code>/string/</code> ，正则表达式。</li>
+<li><code>%w(str1 str2 str3)</code> 相当于 <code>['str1', 'str2', 'str3']</code> 。</li>
+<li><code>%W(str1 str2 str3)</code> 相当于 <code>["str1", "str2", "str3"]</code> 。</li>
+<li><code>%s(string)</code> 相当于 <code>'string'.to_sym</code> 或 <code>:'string'</code> 。注意是单引号，所以不会对字符串中的变量表达式进行运算。</li>
+<li><code>%x(string)</code> 相当于 `string`。执行系统中的命令，跟shell语法中的`cmd`差不多。如果命令有错会抛出异常并且没有返回。</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[如何清除旧的linux kernel]]></title>
     <link href="http://beiersi.github.io/blog/2013/11/02/qing-ru-he-chu-jiu-de-linux-kernel/"/>
     <updated>2013-11-02T00:13:00+08:00</updated>
     <id>http://beiersi.github.io/blog/2013/11/02/qing-ru-he-chu-jiu-de-linux-kernel</id>
     <content type="html"><![CDATA[<p>前几天用aptitude upgrade升级，总是提示无法安装成功新的linux kernel，看到报错信息里面有以后bzip没有空间什么的（过了好几天，原文提示记不住了），df看了一下boot分区90%多了，网上搜索了一下，大概的解决办法应该删除之前旧的linux核心，可参考 <a href="http://askubuntu.com/questions/2793/how-do-i-remove-or-hide-old-kernel-versions-to-clean-up-the-boot-menu">这里</a>,执行命令：</p>
 
-<p>dpkg -l &lsquo;linux-<em>&rsquo; | sed &lsquo;/^ii/!d;/&rsquo;&ldquo;$(uname -r | sed &#8220;s/(.</em>)&ndash;([^0-9]+)/\1/&rdquo;)&ldquo;&lsquo;/d;s/^[^ ]<em> [^ ]</em> ([^ ]<em>).</em>/\1/;/[0-9]/!d&rsquo; | xargs sudo apt-get -y purge</p>
+<figure class='code'><figcaption><span>命令参考</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>dpkg -l <span class="s1">&#39;linux-*&#39;</span> | sed <span class="s1">&#39;/^ii/!d;/&#39;</span><span class="s2">&quot;$(uname -r | sed &quot;</span>s/<span class="se">\(</span>.*<span class="se">\)</span>-<span class="se">\(</span><span class="o">[</span>^0-9<span class="o">]</span><span class="se">\+\)</span>/<span class="se">\1</span>/<span class="s2">&quot;)&quot;</span><span class="s1">&#39;/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d&#39;</span> | xargs sudo apt-get -y purge
+</span></code></pre></td></tr></table></div></figure>
 
-<p>。然后boot分区就有空间了。继续执行apt-get upgrade，成功升级。</p>
+
+<p>。然后boot分区就有空间了。继续执行<code>apt-get upgrade</code>，成功升级。</p>
 ]]></content>
   </entry>
   

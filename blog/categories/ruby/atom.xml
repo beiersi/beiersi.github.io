@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | 黔之驴]]></title>
   <link href="http://beiersi.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://beiersi.github.io/"/>
-  <updated>2013-11-02T00:39:49+08:00</updated>
+  <updated>2013-11-18T23:41:12+08:00</updated>
   <id>http://beiersi.github.io/</id>
   <author>
     <name><![CDATA[贝尔斯]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ruby 字符串定义中百分号的用法]]></title>
+    <link href="http://beiersi.github.io/blog/2013/11/18/ruby-string-bai-fen-hao-yong-fa/"/>
+    <updated>2013-11-18T22:43:00+08:00</updated>
+    <id>http://beiersi.github.io/blog/2013/11/18/ruby-string-bai-fen-hao-yong-fa</id>
+    <content type="html"><![CDATA[<ol>
+<li><code>%(string)</code> 、<code>%Q(string)</code> 相当于 <code>"string"</code> 。双引号字符串表达式</li>
+<li><code>%q(string)</code> 相当于 <code>'string'</code> ，单引号字符串表达式，不会对字符串中的变量运算。</li>
+<li><code>%r(string)</code> 相当于 <code>/string/</code> ，正则表达式。</li>
+<li><code>%w(str1 str2 str3)</code> 相当于 <code>['str1', 'str2', 'str3']</code> 。</li>
+<li><code>%W(str1 str2 str3)</code> 相当于 <code>["str1", "str2", "str3"]</code> 。</li>
+<li><code>%s(string)</code> 相当于 <code>'string'.to_sym</code> 或 <code>:'string'</code> 。注意是单引号，所以不会对字符串中的变量表达式进行运算。</li>
+<li><code>%x(string)</code> 相当于 `string`。执行系统中的命令，跟shell语法中的`cmd`差不多。如果命令有错会抛出异常并且没有返回。</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ubuntu 13.10 下安装apache+passenger]]></title>
